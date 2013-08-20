@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# This code is based on the code with the same name in iRODS 3.3.
+
 import sys
 import pika
 
