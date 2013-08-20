@@ -1,20 +1,22 @@
 #!/usr/bin/env python
-# This code is based on the code with the same name in iRODS 3.3.
-
 import sys
 import pika
 
 host = sys.argv[1]
 port = sys.argv[2]
-key = sys.argv[3]
-body = sys.argv[4]
+user = sys.argv[3]
+password = sys.argv[4]
+key = sys.argv[5]
+body = sys.argv[6]
 
 exchange='irods'
+credentials = pika.PlainCredentials(user, password)
 
 connection = pika.BlockingConnection(
 	pika.ConnectionParameters(
 			host=host,
-			port=int(port)
+			port=int(port),
+			credentials=credentials
 	)
 )
 
@@ -26,4 +28,5 @@ channel.exchange_declare(exchange=exchange,
 channel.basic_publish(exchange=exchange,
                       routing_key=key,
                       body=body)
+
 connection.close()
