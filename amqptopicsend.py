@@ -1,14 +1,15 @@
 #!/usr/bin/env python2.6
 import sys
 import pika
+import pprint
 
 host = sys.argv[1]
-port = sys.argv[2]
+port = int(sys.argv[2])
 user = sys.argv[3]
 password = sys.argv[4]
-key = sys.argv[5]
-body = sys.argv[6]
-ephemeral = sys.argv[7]  # Indicates if the exchange is only temporary (for testing)
+ephemeral = sys.argv[5].lower() == 'true'  # Indicates if the exchange is only temporary (for testing)
+key = sys.argv[6]
+body = sys.argv[7]
 
 exchange='irods'
 credentials = pika.PlainCredentials(user, password)
@@ -16,12 +17,14 @@ credentials = pika.PlainCredentials(user, password)
 connection = pika.BlockingConnection(
 	pika.ConnectionParameters(
 			host=host,
-			port=int(port),
+			port=port,
 			credentials=credentials
 	)
 )
 
 channel = connection.channel()
+
+pprint.pprint (sys.argv[5])
 
 channel.exchange_declare(exchange=exchange,
                          type='topic',
