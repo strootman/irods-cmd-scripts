@@ -8,6 +8,7 @@ user = sys.argv[3]
 password = sys.argv[4]
 key = sys.argv[5]
 body = sys.argv[6]
+ephemeral = sys.argv[7]  # Indicates if the exchange is only temporary (for testing)
 
 exchange='irods'
 credentials = pika.PlainCredentials(user, password)
@@ -23,7 +24,9 @@ connection = pika.BlockingConnection(
 channel = connection.channel()
 
 channel.exchange_declare(exchange=exchange,
-                         type='topic')
+                         type='topic',
+                         durable=(not ephemeral),
+                         auto_delete=ephemeral)
 
 channel.basic_publish(exchange=exchange,
                       routing_key=key,
