@@ -30,6 +30,9 @@ channel.exchange_declare(exchange=exchange,
 
 channel.basic_publish(exchange=exchange,
                       routing_key=key,
-                      body=body)
+                      body=body,
+                      properties=pika.BasicProperties(
+                          delivery_mode = 2,
+                      ))
 
 connection.close()
