@@ -1,7 +1,6 @@
 #!/usr/bin/env python2.6
 import sys
 import pika
-import pprint
 
 host = sys.argv[1]
 port = int(sys.argv[2])
@@ -23,8 +22,6 @@ connection = pika.BlockingConnection(
 )
 
 channel = connection.channel()
-
-pprint.pprint (sys.argv[5])
 
 channel.exchange_declare(exchange=exchange,
                          type='topic',
