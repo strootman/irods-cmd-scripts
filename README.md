@@ -1,7 +1,3 @@
-The file ampqtopicsend.py provides a way to send messages to an AMQP topic exchange from iRODS 
-rules.
+These are a collection of custom scripts called from iRODS rules.  These should be placed in the server/bin/cmd/ subdirectory of an iRODS installation.
 
-To install the script, place ampqtopicsend.py in the the server/bin/cmd/ subdirectory of an iRODS 
-installation.
-
-This script requires that python be installed along with the pika library.
+These scripts require that python 2.6 be installed along with the pika library.
