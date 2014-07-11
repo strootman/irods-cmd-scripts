@@ -7,5 +7,5 @@ if [ "$(uname)" == Linux ]
 then
     uuidgen -t
 else
-    uuidgen
+    uuidgen | tr '[:upper:]' '[:lower:]'
 fi
